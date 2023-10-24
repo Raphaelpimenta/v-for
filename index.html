@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    <!-- for com array -->
+    <!-- <div id="app">
+        <ul>
+            <li v-for="(item, index) in lista">{{item}} {{index}}</li>
+        </ul>
+    </div> -->
+
+    <!-- <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                lista: ["Raphael", "Pimenta", "Gomes"]
+            }
+        })
+
+    </script> -->
+
+    <!-- For com objetos -->
+
+    <div id="app">
+        <ul>
+            <li v-for="estado in estados">{{estado.nome}} {{estado.populacao}}</li>
+            <li v-for="(estado, key, index) in estados">{{key}} {{index}}</li>
+            <!-- Destructing -->
+            <li v-for="({nome, populacao}) in estados">{{nome}}</li>
+            <li v-for="({nome, populacao}) in estados">{{populacao}}</li>
+        </ul>
+
+        <div v-for="numero in 20">{{numero}}</div>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                estados: {
+                sp: {
+                    populacao: "45 milhões",
+                    nome: "São Paulo"
+                },
+                mg: {
+                    populacao: "21 milhões",
+                    nome: "Minas Gerais"
+                },
+                rj: {
+                    populacao: "17 milhões",
+                    nome: "Rio de Janeiro"
+                }
+                }
+            }
+            });
+    </script>
+    
+</body>
+</html>

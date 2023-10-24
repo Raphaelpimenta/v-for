@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>v-for</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+    
+
+    <!-- Utilizando a api:
+  https://viacep.com.br/ws/04538133/json/
+  Mostre o cep, logradouro, complemento, bairro, localidade e uf do que for retornado. -->
+    <div id="app">
+        <ul>
+            <li v-for="(dado, key) in dados"><b>{{key}}:</b> {{dado}}</li>
+        </ul>
+        <button @click="puxarDados">Puxar Dados</button>
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                dados: {}
+            },
+            methods: {
+                puxarDados(){
+                    fetch('https://viacep.com.br/ws/04538133/json/')
+                    .then(r => r.json())
+                    .then(r => {
+                        this.dados = r;
+                    })
+                }
+            }
+        })
+    </script>
+
+    <!-- Use o arquivo json da aula, para listar os cursos e as matérias.-->
+
+    <div id="app2">
+        <div v-for="curso in cursos">
+            <h1><a :href="curso.link">{{curso.curso}}</a></h1>
+            <ul>
+                <!-- <li v-for="aula in curso.aulas">
+                    {{aula.nome}} - {{aula.tempo}}
+                </li> -->
+                <li v-for="{nome, tempo} in curso.aulas">
+                    {{nome}} - {{tempo}}
+                </li>
+            </ul>
+        </div>
+        <button @click="puxarCurso">Puxar Cursos</button>
+    </div>
+
+    <script>
+        const vm2 = new Vue({
+            el: '#app2',
+            data: {
+                cursos: {}
+            },
+            methods: {
+                puxarCurso(){
+                    fetch("./cursos.json")
+                    .then(r => r.json())
+                    .then(r => {
+                        this.cursos = r
+                    })
+                }
+            }
+        })
+    </script>
+
+    
+</body>
+</html>
